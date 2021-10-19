@@ -4,4 +4,15 @@
 
 {% block content %}
 <h1>Home</h1>
+<button onclick="display()">click me!</button>
+<div id="display"></div>
+<script>
+    function display(){
+        fetch("1").then(
+            value => document.getElementById("display").innerHTML = value.ok
+        )
+        
+    }
+</script>
+
 {% endblock %}
