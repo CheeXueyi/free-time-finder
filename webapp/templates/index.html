@@ -8,8 +8,8 @@
 <div id="display"></div>
 <script>
     function display(){
-        fetch("1").then(
-            value => document.getElementById("display").innerHTML = value.ok
+        fetch("/json/1").then(
+            value => document.getElementById("display").innerHTML = value.test
         )
         
     }

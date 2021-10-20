@@ -22,7 +22,7 @@ def timefinder():
 def link(lnk):
     return render_template("time_display.html", link = lnk)
 
-@app.route("/<ses_id>")
+@app.route("/json/<ses_id>")
 def json(ses_id):
     #search session in database using ses_id
     print(ses_id)
