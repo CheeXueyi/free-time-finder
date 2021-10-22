@@ -1,0 +1,17 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table , th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    empty-cells: hide;
+}
+
+th ,td {
+    width : 100px;
+    height : 100px;
+    background-color: #fbbc04;
+    empty-cells: hide;
+}
+

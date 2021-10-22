@@ -8,10 +8,9 @@
 <div id="display"></div>
 <script>
     function display(){
-        fetch("/json/1").then(
-            value => document.getElementById("display").innerHTML = value.test
-        )
-        
+        fetch("/json/1")
+            .then(response => response.json())
+            .then(data => document.getElementById("display").innerHTML = data.greetings);
     }
 </script>
 
