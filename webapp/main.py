@@ -16,6 +16,9 @@ class Sessions(db.Model):
     dates = db.relationship("Date", cascade="all, delete-orphan", backref="session")
     people = db.relationship("Person", cascade="all, delete-orphan", backref="session")
 
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 class Date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
@@ -38,12 +41,28 @@ class Busy_time(db.Model):
 def home():
     return render_template("index.html")
 
-@app.route("/add_session")
+@app.route("/add_session", methods=["GET", "POST"])
 def add_session():
-    #code to add new session
-    return 0
+    if request.method == "POST":
+        title = request.form["title"]
+        host = request.form["host"]
+        new_session = Sessions(title=title, host=host)
+        db.session.add(new_session)
+        db.session.commit()
+        id = new_session.id
+        return redirect(url_for("add_session_status", id=id))
+    else:
+        return render_template("add_session.html")
 
-@app.route("/add_person")
+@app.route("/add_session_status/<id>")
+def add_session_status(id):
+    query_sess = Sessions.query.get(id)
+    if query_sess != None:
+        return jsonify(query_sess.as_dict())
+    else:
+        return "id not found"
+
+@app.route("/add_person", methods=["GET", "POST"])
 def add_person():    
     #code to add new person
     return 0 
@@ -83,4 +102,5 @@ def json(ses_id):
     return json
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
