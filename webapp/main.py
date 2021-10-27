@@ -72,34 +72,6 @@ def find_session():
     #find and show session free times
     return 0 
 
-@app.route("/timefinder/", methods=["GET", "POST"])
-def timefinder():
-    if request.method == "POST":
-        link = request.form["link"]
-        session["link"] = link
-        
-        #search for link
-        return redirect(url_for("link"))
-        
-    else:
-        return render_template("timefinder.html")
-
-@app.route("/link")
-def link():
-    if "link" in session:
-        link = session["link"]
-        return render_template("time_display.html", link = link)
-    else:
-        return redirect(url_for("timefinder"))
-
-@app.route("/json/<ses_id>")
-def json(ses_id):
-    #search session in database using ses_id
-    print(ses_id)
-    dict = {"greetings":"hi"}
-    print(dict)
-    json = jsonify(dict)
-    return json
 
 if __name__ == "__main__":
     db.create_all()
