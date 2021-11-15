@@ -58,7 +58,7 @@ def add_session():
 def add_session_status(id):
     query_sess = Sessions.query.get(id)
     if query_sess != None:
-        return jsonify(query_sess.as_dict())
+        return render_template("add_session_status", id=id)
     else:
         return "id not found"
 
@@ -74,7 +74,7 @@ def find_session():
 
 @app.route("/json/<id>")
 def json_req(id):
-    query_sess = Sessions.query.get(id)
+    query_sess = Sessions.query.get(int(id))
     if query_sess != None:
         return jsonify(query_sess.as_dict())
     else:
