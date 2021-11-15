@@ -72,6 +72,17 @@ def find_session():
     #find and show session free times
     return 0 
 
+@app.route("/json/<id>")
+def json_req(id):
+    query_sess = Sessions.query.get(id)
+    if query_sess != None:
+        return jsonify(query_sess.as_dict())
+    else:
+        return jsonify({"status":0})
+
+@app.route("/timequery")
+def timequery():
+    return render_template("timequery.html")
 
 if __name__ == "__main__":
     db.create_all()

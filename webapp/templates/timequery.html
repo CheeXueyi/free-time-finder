@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}timefinder{% endblock %}
+
+{% block content %}
+<form action = "#" method="post">
+    <p>Url</p>
+    <p><input type="text" name="link"></p>
+    <p><input type="submit" value="submit"></p>
+</form>
+<h1>id:</h1><input type="number", id="id">
+<button onclick="display(document.getElementById('id').value)">click me!</button>
+<div id="display"></div>
+<script>
+    function display(id){
+        fetch("/json/"+id)
+            .then(response => response.json())
+            .then(data => document.getElementById("dislay").innerHTML = data)
+    }
+</script>
+{% endblock %}
