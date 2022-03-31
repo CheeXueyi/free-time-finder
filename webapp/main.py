@@ -50,7 +50,7 @@ def add_session():
         db.session.add(new_session)
         db.session.commit()
         id = new_session.id
-        return redirect(url_for("add_session_status", id=id))
+        return render_template("add_session_success.html", id=id)
     else:
         return render_template("add_session.html")
 
@@ -67,12 +67,12 @@ def add_session_status(id):
 @app.route("/add_person", methods=["GET", "POST"])
 def add_person():    
     #code to add new person
-    return 0 
+    return "coming soon" 
 
 @app.route("/find_session")
 def find_session():
     #find and show session free times
-    return 0 
+    return render_template("timequery.html")
 
 @app.route("/json/<id>")
 def json_req(id):
@@ -91,3 +91,4 @@ def timequery():
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
+    

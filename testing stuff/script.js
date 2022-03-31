@@ -28,8 +28,8 @@ for(let i = 0; i < dates.length; i++)
     `
     for(let j = range["start_time"]; j <= range["end_time"]; j++)
     {
-        
+        html += "<td></td>"
     }
     
-    document.getElementById("calander").innerHTML += html;
+    document.getElementById("calendar").innerHTML += html;
 }
