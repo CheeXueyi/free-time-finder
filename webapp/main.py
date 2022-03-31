@@ -58,7 +58,9 @@ def add_session():
 def add_session_status(id):
     query_sess = Sessions.query.get(id)
     if query_sess != None:
-        return render_template("add_session_status", id=id)
+        query_sess = query_sess.as_dict()
+        title = query_sess["title"]
+        return render_template("add_session_status.html", id=id, status="success", title=title)
     else:
         return "id not found"
 
@@ -76,7 +78,9 @@ def find_session():
 def json_req(id):
     query_sess = Sessions.query.get(int(id))
     if query_sess != None:
-        return jsonify(query_sess.as_dict())
+        query_sess = query_sess.as_dict()
+        query_sess["status"] = 1
+        return jsonify(query_sess)
     else:
         return jsonify({"status":0})
 

@@ -10,7 +10,7 @@
     function display(){
         fetch("/json/1")
             .then(response => response.json())
-            .then(data => document.getElementById("display").innerHTML = data.greetings);
+            .then(data => document.getElementById("display").innerHTML = data.status);
     }
 </script>
 
