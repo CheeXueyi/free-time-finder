@@ -1,3 +1,4 @@
+from argparse import REMAINDER
 from flask import Flask, redirect, url_for, render_template, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
@@ -40,6 +41,18 @@ class Busy_time(db.Model):
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/functions", methods=["GET"])
+def functions():
+    return render_template("functions.html")
+
+@app.route("/make_event", methods = ["GET", "POST"])
+def make_event():
+    if request.method == "POST":
+        #take details of event to make new event code here
+        None
+    else:
+        return render_template("make_event.html")
 
 @app.route("/add_session", methods=["GET", "POST"])
 def add_session():

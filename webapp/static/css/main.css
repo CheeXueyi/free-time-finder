@@ -51,6 +51,20 @@ h1 {
     height:auto;
 }
 
+.button {
+    color:black;
+    font-size:1.5em;
+    margin-right:30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.1s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.button:hover{
+    color:grey;
+} 
+
 #navright {
     float:right;
     line-height: 100px;

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}index{% endblock %}
+
+{% block content %}
+<form id = "event_inp" action = "#" method="post">
+    <p>Event title: <input type="text" name="title" required></p>
+    <p>Host name: <input type="text" name="host" required></p>
+    <p>Date range 1: <input type="date" name="data_range_from[]"> to <input type="date" name="data_range_to[]"><br></p>
+    <button onclick="addDateRange()">Add more date ranges</button>
+    <p><input type="submit" value="Submit"></p>
+</form>
+<script src="{{url_for('static', filename='buttons.js')}}"></script>
+{% endblock %}
