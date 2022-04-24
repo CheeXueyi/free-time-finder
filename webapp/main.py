@@ -42,6 +42,8 @@ class Busy_time(db.Model):
 def home():
     return render_template("index.html")
 
+#everything under functions start here
+
 @app.route("/functions", methods=["GET"])
 def functions():
     return render_template("functions.html")
@@ -54,16 +56,36 @@ def make_event():
     else:
         return render_template("make_event.html")
 
+#tutorial starts here
+
+@app.route("/tutorial")
+def tutorial():
+    return render_template("tutorial.html")
+
+#about us starts here
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+#--------------------------------------------------------------
+#------------------------TESTING-------------------------------
+#--------------------------------------------------------------
 @app.route("/add_session", methods=["GET", "POST"])
 def add_session():
     if request.method == "POST":
         title = request.form["title"]
         host = request.form["host"]
+        test = request.form["test"]
+        print(test)
+        '''
         new_session = Sessions(title=title, host=host)
         db.session.add(new_session)
         db.session.commit()
         id = new_session.id
         return render_template("add_session_success.html", id=id)
+        '''
     else:
         return render_template("add_session.html")
 

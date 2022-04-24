@@ -25,6 +25,8 @@ h1 {
 }
 
 
+/** navigation starts here **/
+
 .nav {
     background-color:rgba(0,0,0,0.6);
     margin-top:0px;
@@ -39,14 +41,14 @@ h1 {
             animation: fadein 1s;
 }
     
-.navleft {
+#navleft {
     float:left;
     line-height: 100px;
     padding-left: 50px;
     padding-top:15px;
 }
 
-.navleft img{
+#navleft img{
     width:220px;
     height:auto;
 }
@@ -88,6 +90,7 @@ h1 {
     color: grey;
 }
 
-#navright #active{
+#navright .active{
     color:grey;
 }
+

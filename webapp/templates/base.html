@@ -6,16 +6,14 @@
 </head>
 <body>
   <div class="nav">
-    <button type="button" id='menu' onclick=''><img src='Images/others/menu.png' width='50' height='50'></button>
-    <div class="navleft">
+    <button type="button" id='menu' onclick=''><img src="{{ url_for('static', filename='menu.png') }}" width='50' height='50'></button>
+    <div id="navleft">
         <a href="/" id="logo">Free Time Finder</a>
     </div>
     <div id="navright">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/functions">Functions</a></li>
-            <li><a href="/tutorial">Tutorial</a></li>
-            <li><a href="/about">About Us</a></li>
+            {% block navright %}
+            {% endblock %}
         </ul>
     </div>    
   </div>

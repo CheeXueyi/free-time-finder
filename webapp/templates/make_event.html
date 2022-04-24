@@ -2,13 +2,31 @@
 
 {% block title %}index{% endblock %}
 
+{% block navright %}
+<li><a href="/">Home</a></li>
+<li><a href="/functions" class="active">Functions</a></li>
+<li><a href="/tutorial">Tutorial</a></li>
+<li><a href="/about">About Us</a></li>
+{% endblock %}
+
 {% block content %}
+<button id = 'btn' >Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
     <p>Event title: <input type="text" name="title" required></p>
     <p>Host name: <input type="text" name="host" required></p>
-    <p>Date range 1: <input type="date" name="data_range_from[]"> to <input type="date" name="data_range_to[]"><br></p>
-    <button onclick="addDateRange()">Add more date ranges</button>
-    <p><input type="submit" value="Submit"></p>
+    <div id="dates">
+        <p>Date range 1: <input type="date" name="data_range_from[]"> to <input type="date" name="data_range_to[]"><br></p>
+    </div>
+    <p id='subm'><input type='submit' value='Submit'></p>
 </form>
-<script src="{{url_for('static', filename='buttons.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){    
+    var date = 2;
+    $("#btn").click(function(){
+        $("#dates").append("<p>Date range " + date.toString() + ": <input type='date' name='data_range_from[]'> to <input type='date' name='data_range_to[]'><br></p>");
+ 	    date++;
+    });
+});
+</script>
 {% endblock %}
