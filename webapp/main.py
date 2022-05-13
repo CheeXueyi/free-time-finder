@@ -10,12 +10,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-class Sessions(db.Model):
+class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
-    host = db.Column(db.String(50))
-    dates = db.relationship("Date", cascade="all, delete-orphan", backref="session")
-    people = db.relationship("Person", cascade="all, delete-orphan", backref="session")
+    dates = db.relationship("Date", cascade="all, delete-orphan", backref="event")
+    people = db.relationship("Person", cascade="all, delete-orphan", backref="event")
 
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -23,18 +22,18 @@ class Sessions(db.Model):
 class Date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
-    session_id = db.Column(db.Integer, db.ForeignKey("sessions.id"))
+    session_id = db.Column(db.Integer, db.ForeignKey("event.id"))
 
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    session_id = db.Column(db.Integer, db.ForeignKey("sessions.id"))
-    busy_times = db.relationship("Busy_time", cascade="all, delete-orphan", backref="person") 
+    session_id = db.Column(db.Integer, db.ForeignKey("event.id"))
+    busy_dates = db.relationship("Busy_date", cascade="all, delete-orphan", backref="person") 
 
-class Busy_time(db.Model):
+class Busy_date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    start = db.Column(db.DateTime)
-    end = db.Column(db.DateTime)
+    start = db.Column(db.Date)
+    end = db.Column(db.Date)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"))
 
 
@@ -53,9 +52,9 @@ def make_event():
     if request.method == "POST":
         #take details of event to make new event code here
         title=request.form['title']
-        host=request.form['host']
+        new_event = Event(title=title)
         for i in request.form:
-            print(i, request.form[i], type(request.form[i]))
+            None
         return "good"
     else:
         return render_template("make_event.html")
