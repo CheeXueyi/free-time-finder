@@ -52,7 +52,11 @@ def functions():
 def make_event():
     if request.method == "POST":
         #take details of event to make new event code here
-        None
+        title=request.form['title']
+        host=request.form['host']
+        for i in request.form:
+            print(i, request.form[i], type(request.form[i]))
+        return "good"
     else:
         return render_template("make_event.html")
 
