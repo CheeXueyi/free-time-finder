@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Event Creation Status{% endblock %}
+
+{% block navright %}
+<li><a href="/">Home</a></li>
+<li><a href="/functions" class="active">Functions</a></li>
+<li><a href="/tutorial">Tutorial</a></li>
+<li><a href="/about">About Us</a></li>
+{% endblock %}
+
+{% block content %}
+<p class="green">{{status}}</p>
+<p class="green">ID:{{id}}</p>
+<p class="green">Title:{{title}}</p>
+{% endblock %}

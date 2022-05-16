@@ -2,6 +2,7 @@ from argparse import REMAINDER
 from flask import Flask, redirect, url_for, render_template, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
+import datetime
 
 app = Flask(__name__)
 app.secret_key = "major_software_project"
@@ -22,12 +23,12 @@ class Event(db.Model):
 class Date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
-    session_id = db.Column(db.Integer, db.ForeignKey("event.id"))
+    event_id = db.Column(db.Integer, db.ForeignKey("event.id"))
 
 class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    session_id = db.Column(db.Integer, db.ForeignKey("event.id"))
+    event_id = db.Column(db.Integer, db.ForeignKey("event.id"))
     busy_dates = db.relationship("Busy_date", cascade="all, delete-orphan", backref="person") 
 
 class Busy_date(db.Model):
@@ -54,8 +55,17 @@ def make_event():
         title=request.form['title']
         new_event = Event(title=title)
         for i in request.form:
-            None
-        return "good"
+            if i[:-1] == "date_range_start":
+                start = datetime.datetime.strptime(request.form[i], "%Y-%m-%d").date()
+            elif i[:-1] == "date_range_end":
+                end = datetime.datetime.strptime(request.form[i], "%Y-%m-%d").date()
+                while start != end + datetime.timedelta(days=1):
+                    new_date = Date(date=start, event=new_event)
+                    print(new_date.event)
+                    db.session.add(new_date)
+                    start += datetime.timedelta(days=1)
+                db.session.commit()
+        return render_template("make_event_status.html", id=new_event.id, status = "Success", title=new_event.title)
     else:
         return render_template("make_event.html")
 
@@ -94,7 +104,7 @@ def add_session():
 
 @app.route("/add_session_status/<id>")
 def add_session_status(id):
-    query_sess = Sessions.query.get(id)
+    query_sess = Event.query.get(id)
     if query_sess != None:
         query_sess = query_sess.as_dict()
         title = query_sess["title"]
