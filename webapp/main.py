@@ -124,17 +124,16 @@ def find_session():
 
 @app.route("/json/<id>")
 def json_req(id):
-    query_sess = Sessions.query.get(int(id))
-    if query_sess != None:
-        query_sess = query_sess.as_dict()
-        query_sess["status"] = 1
-        return jsonify(query_sess)
+    event = Event.query.get(int(id))
+    if event != None:
+        res = event.as_dict()
+        res["dates"] = []
+        for i in event.dates:
+            res["dates"].append(i.date)
+        res["status"] = 1
+        return jsonify(res)
     else:
         return jsonify({"status":0})
-
-@app.route("/timequery")
-def timequery():
-    return render_template("timequery.html")
 
 if __name__ == "__main__":
     db.create_all()
