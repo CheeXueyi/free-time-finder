@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}index{% endblock %}
+
+{% block navright %}
+<li><a href="/">Home</a></li>
+<li><a href="/functions" class="active">Functions</a></li>
+<li><a href="/tutorial">Tutorial</a></li>
+<li><a href="/about">About Us</a></li>
+{% endblock %}
+
+{% block content %}
+<p>Event id:{{event_id}}</p>
+<form>
+    input person data here
+</form>
+{% endblock %}

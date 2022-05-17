@@ -52,7 +52,7 @@ def functions():
 def make_event():
     if request.method == "POST":
         #take details of event to make new event code here
-        title=request.form['title']
+        title = request.form['title']
         new_event = Event(title=title)
         for i in request.form:
             if i[:-1] == "date_range_start":
@@ -69,8 +69,21 @@ def make_event():
     else:
         return render_template("make_event.html")
 
-#tutorial starts here
+@app.route("/find_event", methods=["GET", "POST"])
+def find_event():
+    if request.method == "POST":
+        #take details of event query here
+        event_id = request.form["id"]
+        event = Event.query.filter_by(id=event_id).first()
+        return render_template("event_page.html", event=event, n_people=len(event.people))
+    else:
+        return render_template("find_event.html")
 
+@app.route("/add_new_participant/<event_id>", methods=["GET", "POST"])
+def add_new_participant(event_id):
+    return render_template("add_new_participant.html", event_id=event_id)
+
+#tutorial starts here
 @app.route("/tutorial")
 def tutorial():
     return render_template("tutorial.html")

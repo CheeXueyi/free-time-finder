@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block navright %}
+<li><a href="/">Home</a></li>
+<li><a href="/functions" class="active">Functions</a></li>
+<li><a href="/tutorial">Tutorial</a></li>
+<li><a href="/about">About Us</a></li>
+{% endblock %}
+
+{% block content %}
+<h2>{{event.title}}</h2>
+<p>Find best dates</p>
+<a href="/add_new_participant/{{event.id}}">Add new participant</a>
+<table>
+    <th colspan="3">Participants</th>
+    {% for i in range(0, n_people) %}
+    <tr>
+        <td>
+            {{i+1}}
+        </td>
+        <td>
+            {{event.people[i].name}}
+        </td>
+        <td>
+            edit
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
