@@ -49,8 +49,8 @@ def functions():
 
 @app.route("/make_event", methods = ["GET", "POST"])
 def make_event():
+    #creates a new "Event" in database using inputted data and shows success page
     if request.method == "POST":
-        #take details of event to make new event code here
         title = request.form['title']
         new_event = Event(title=title)
         for i in request.form:
@@ -70,8 +70,8 @@ def make_event():
 
 @app.route("/find_event", methods=["GET", "POST"])
 def find_event():
+    #directs to event details page according to inputted event_id
     if request.method == "POST":
-        #take details of event query here
         event_id = request.form["id"]
         event = Event.query.filter_by(id=event_id).first()
         return render_template("event_page.html", event=event, n_people=len(event.people))
@@ -80,18 +80,22 @@ def find_event():
 
 @app.route("/add_new_participant", methods=["GET", "POST"])
 def add_new_participant():
+    #creates a new "Person" in an "Event" in data base along with their busy dates
+    event_id = request.args.get("event_id")
+    query_event = Event.query.filter_by(id=event_id).first()
     if request.method == "POST":
-        busy_dates = []
+        new_name = request.form["name"]
+        new_person = Person(name=new_name, event=query_event)
+        db.session.add(new_person)
         for i in request.form:
-            if i == "name":
-                name = request.form[i]
-            else:
-                busy_dates.append(request.form[i])
-        return "his"
+            if i != "name":
+                busy_date = datetime.datetime.strptime(i, "%Y-%m-%d").date()
+                new_busy_date = Busy_date(date=busy_date, person=new_person)
+                db.session.add(new_busy_date)
+        db.session.commit()
+        return render_template("add_new_participant_status.html", status="Success", person=new_person)
     else:
-        event_id = request.args.get("event_id")
-        event = Event.query.filter_by(id=event_id).first()
-        return render_template("add_new_participant.html", event=event)
+        return render_template("add_new_participant.html", event=query_event)
 
 #tutorial starts here
 @app.route("/tutorial")
