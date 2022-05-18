@@ -79,8 +79,9 @@ def find_event():
     else:
         return render_template("find_event.html")
 
-@app.route("/add_new_participant/<event_id>", methods=["GET", "POST"])
-def add_new_participant(event_id):
+@app.route("/add_new_participant", methods=["GET", "POST"])
+def add_new_participant():
+    event_id = request.args.get("event_id")
     return render_template("add_new_participant.html", event_id=event_id)
 
 #tutorial starts here
