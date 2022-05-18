@@ -10,23 +10,23 @@
 {% endblock %}
 
 {% block content %}
-<p>Event title:{{event.title}}</p>
-<p>Event id:{{event.id}}</p>
+<p>Event title:{{person.event.title}}</p>
+<p>Event id:{{person.event_id}}</p>
 <form id = "event_inp" action = "#" method="post">
-    <p>New participant name:<input type="text" name="name", placeholder="Name"></p>
+    <p>Participant name:<input type="text" name="name", value="{{person.name}}"></p>
     <table border="1">
         <tr>
             <th>date</th>
             <th>busy</th>
-        </tr>
-        
-    {% for date in event.dates %}
+        </tr>        
+    {% for date in person.event.dates %}
         <tr>
             <td>{{date.date}}</td>
-            <td><input type="checkbox" name="{{date.date}}"></td>
+            <td><input type="checkbox" name="{{date.date}}" {% if date.date in person_busy_dates %} checked {% endif %}></td>
         </tr>
     {% endfor %}
     </table>
-    <p id='subm'><input type='submit' value='Submit'></p>
+    <p id='subm'><input type='submit' value='Update'></p>
+    <a href="/find_event?event_id={{person.event_id}}"><p>Cancel</p></a>
 </form>
 {% endblock %}

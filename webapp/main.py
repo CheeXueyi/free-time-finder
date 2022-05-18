@@ -71,6 +71,10 @@ def make_event():
 @app.route("/find_event", methods=["GET", "POST"])
 def find_event():
     #directs to event details page according to inputted event_id
+    if request.args.get("event_id") != None:
+        event_id = request.args.get("event_id")
+        event = Event.query.filter_by(id=event_id).first()
+        return render_template("event_page.html", event=event, n_people=len(event.people))
     if request.method == "POST":
         event_id = request.form["id"]
         event = Event.query.filter_by(id=event_id).first()
@@ -96,6 +100,29 @@ def add_new_participant():
         return render_template("add_new_participant_status.html", status="Success", person=new_person)
     else:
         return render_template("add_new_participant.html", event=query_event)
+
+@app.route("/edit_participant", methods=["GET", "POST"])
+def edit_participant():
+    person_id = request.args.get("person_id")
+    query_person = Person.query.filter_by(id=person_id).first()
+    query_event = query_person.event
+    if request.method == "POST":
+        db.session.delete(query_person)
+        new_name = request.form["name"]
+        new_person = Person(name=new_name, event=query_event)
+        db.session.add(new_person)
+        for i in request.form:
+            if i != "name":
+                busy_date = datetime.datetime.strptime(i, "%Y-%m-%d").date()
+                new_busy_date = Busy_date(date=busy_date, person=new_person)
+                db.session.add(new_busy_date)
+        db.session.commit()
+        return render_template("add_new_participant_status.html", status="Success", person=new_person)
+    else:
+        person_busy_dates = []
+        for i in query_person.busy_dates:
+            person_busy_dates.append(i.date)
+        return render_template("edit_participant_details.html", person=query_person, person_busy_dates=person_busy_dates)
 
 #tutorial starts here
 @app.route("/tutorial")
