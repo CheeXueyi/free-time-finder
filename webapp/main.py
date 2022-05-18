@@ -33,8 +33,7 @@ class Person(db.Model):
 
 class Busy_date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    start = db.Column(db.Date)
-    end = db.Column(db.Date)
+    date=db.Column(db.Date)
     person_id = db.Column(db.Integer, db.ForeignKey("person.id"))
 
 
@@ -81,8 +80,18 @@ def find_event():
 
 @app.route("/add_new_participant", methods=["GET", "POST"])
 def add_new_participant():
-    event_id = request.args.get("event_id")
-    return render_template("add_new_participant.html", event_id=event_id)
+    if request.method == "POST":
+        busy_dates = []
+        for i in request.form:
+            if i == "name":
+                name = request.form[i]
+            else:
+                busy_dates.append(request.form[i])
+        return "his"
+    else:
+        event_id = request.args.get("event_id")
+        event = Event.query.filter_by(id=event_id).first()
+        return render_template("add_new_participant.html", event=event)
 
 #tutorial starts here
 @app.route("/tutorial")

@@ -10,8 +10,23 @@
 {% endblock %}
 
 {% block content %}
-<p>Event id:{{event_id}}</p>
-<form>
-    input person data here
+<p>Event title:{{event.title}}</p>
+<p>Event id:{{event.id}}</p>
+<form id = "event_inp" action = "#" method="post">
+    <p>New participant name:<input type="text" name="name", placeholder="Name"></p>
+    <table border="1">
+        <tr>
+            <th>date</th>
+            <th>busy</th>
+        </tr>
+        
+    {% for date in event.dates %}
+        <tr>
+            <td>{{date.date}}</td>
+            <td><input type="checkbox" name="{{date.date}}"></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <p id='subm'><input type='submit' value='Submit'></p>
 </form>
 {% endblock %}
