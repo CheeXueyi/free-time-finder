@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Add New Participant Status{% endblock %}
+{% block title %}Delete Participant Status{% endblock %}
 
 {% block navright %}
 <li><a href="/">Home</a></li>
@@ -11,7 +11,6 @@
 
 {% block content %}
 <p class="green">{{status}}</p>
-<p class="green">Name:{{person.name}}</p>
-<p class="green">Busy dates:{% for i in person.busy_dates %}<br>{{i.date}}{% endfor %}</p>
-<a href="/find_event?event_id={{person.event_id}}"><p>Back to event page</p></a>
+<p class="green">Deleted person "{{person_name}}" in event "{{event.title}}".</p>
+<a href="/find_event?event_id={{event.id}}"><p>Back to event page</p></a>
 {% endblock %}

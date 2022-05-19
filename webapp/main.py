@@ -117,13 +117,23 @@ def edit_participant():
                 new_busy_date = Busy_date(date=busy_date, person=new_person)
                 db.session.add(new_busy_date)
         db.session.commit()
-        return render_template("add_new_participant_status.html", status="Success", person=new_person)
+        return render_template("edit_participant_status.html", status="Success", person=new_person)
     else:
         person_busy_dates = []
         for i in query_person.busy_dates:
             person_busy_dates.append(i.date)
-        return render_template("edit_participant_details.html", person=query_person, person_busy_dates=person_busy_dates)
+        return render_template("edit_participant.html", person=query_person, person_busy_dates=person_busy_dates)
 
+@app.route("/delete_person")
+def delete_person():
+    person_id = request.args["person_id"]
+    query_person = Person.query.filter_by(id=person_id).first()
+    name = query_person.name
+    event = query_person.event
+    db.session.delete(query_person)
+    db.session.commit()
+    return render_template("delete_person_status.html", status="Success", event = event, person_name=name)
+    
 #tutorial starts here
 @app.route("/tutorial")
 def tutorial():

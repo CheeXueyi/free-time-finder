@@ -13,7 +13,7 @@
 <p>Event title:{{event.title}}</p>
 <p>Event id:{{event.id}}</p>
 <form id = "event_inp" action = "#" method="post">
-    <p>New participant name:<input type="text" name="name", placeholder="Name"></p>
+    <p>New participant name:<input type="text" name="name", placeholder="Name" required></p>
     <table border="1">
         <tr>
             <th>date</th>
@@ -28,5 +28,6 @@
     {% endfor %}
     </table>
     <p id='subm'><input type='submit' value='Submit'></p>
+    <a href="/find_event?event_id={{event.id}}"><p>Cancel</p></a>
 </form>
 {% endblock %}
