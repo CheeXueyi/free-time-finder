@@ -10,12 +10,19 @@
 {% endblock %}
 
 {% block content %}
-<form id = "event_dets" action = "#" method="post">
-    <p>Event id:<input type="int" name="id" required></p>
-    <p id='subm'><input type='submit' value='Search'></p>
-</form>
+<p>Event id:<input id="event_id" type="number" name="id" required></p>
+<button id="find_event">Find Event</button>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-
+    $(document).ready();
+    $("#find_event").click(function(){
+        let event_id = $("#event_id").val();
+        if(event_id == ""){
+            alert("Please enter event id")
+        }
+        else{
+            window.location.href = `/find_event?event_id=${event_id}`   
+        }
+    })
 </script>
 {% endblock %}

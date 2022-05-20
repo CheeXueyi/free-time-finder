@@ -67,15 +67,11 @@ def make_event():
     else:
         return render_template("make_event.html")
 
-@app.route("/find_event", methods=["GET", "POST"])
+@app.route("/find_event")
 def find_event():
     #directs to event details page according to inputted event_id
     if request.args.get("event_id") != None:
         event_id = request.args.get("event_id")
-        event = Event.query.filter_by(id=event_id).first()
-        return render_template("event_page.html", event=event, n_people=len(event.people))
-    if request.method == "POST":
-        event_id = request.form["id"]
         event = Event.query.filter_by(id=event_id).first()
         return render_template("event_page.html", event=event, n_people=len(event.people))
     else:
@@ -133,6 +129,39 @@ def delete_person():
     db.session.commit()
     return render_template("delete_person_status.html", status="Success", event = event, person_name=name)
     
+@app.route("/json")
+def json_req():
+    if "id" in request.args:
+        id = request.args["id"]
+        event = Event.query.get(int(id))
+        if event != None:
+            res = event.as_dict()
+            
+            #get event dates
+            res["dates"] = []
+            for i in event.dates:
+                res["dates"].append(i.date)
+            
+            #get event people
+            res["people"] = []
+            for i in event.people:
+                busy_dates = []
+                for busy_date in i.busy_dates:
+                    busy_dates.append(busy_date.date)
+                name = i.name
+                person = {
+                    "name":name,
+                    "busy_dates":busy_dates
+                }
+                res["people"].append(person)
+            
+            res["status"] = 1
+            return jsonify(res)
+        else:
+            return jsonify({"status":0})
+    else:
+        return jsonify({"status":0})
+
 #tutorial starts here
 @app.route("/tutorial")
 def tutorial():
@@ -184,39 +213,6 @@ def add_person():
 def find_session():
     #find and show session free times
     return render_template("timequery.html")
-
-@app.route("/json")
-def json_req():
-    if "id" in request.args:
-        id = request.args["id"]
-        event = Event.query.get(int(id))
-        if event != None:
-            res = event.as_dict()
-            
-            #get event dates
-            res["dates"] = []
-            for i in event.dates:
-                res["dates"].append(i.date)
-            
-            #get event people
-            res["people"] = []
-            for i in event.people:
-                busy_dates = []
-                for busy_date in i.busy_dates:
-                    busy_dates.append(busy_date.date)
-                name = i.name
-                person = {
-                    "name":name,
-                    "busy_dates":busy_dates
-                }
-                res["people"].append(person)
-            
-            res["status"] = 1
-            return jsonify(res)
-        else:
-            return jsonify({"status":0})
-    else:
-        return "invalid request"
 
 if __name__ == "__main__":
     db.create_all()
