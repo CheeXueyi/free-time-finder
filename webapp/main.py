@@ -60,7 +60,6 @@ def make_event():
                 end = datetime.datetime.strptime(request.form[i], "%Y-%m-%d").date()
                 while start != end + datetime.timedelta(days=1):
                     new_date = Date(date=start, event=new_event)
-                    print(new_date.event)
                     db.session.add(new_date)
                     start += datetime.timedelta(days=1)
                 db.session.commit()
@@ -186,18 +185,38 @@ def find_session():
     #find and show session free times
     return render_template("timequery.html")
 
-@app.route("/json/<id>")
-def json_req(id):
-    event = Event.query.get(int(id))
-    if event != None:
-        res = event.as_dict()
-        res["dates"] = []
-        for i in event.dates:
-            res["dates"].append(i.date)
-        res["status"] = 1
-        return jsonify(res)
+@app.route("/json")
+def json_req():
+    if "id" in request.args:
+        id = request.args["id"]
+        event = Event.query.get(int(id))
+        if event != None:
+            res = event.as_dict()
+            
+            #get event dates
+            res["dates"] = []
+            for i in event.dates:
+                res["dates"].append(i.date)
+            
+            #get event people
+            res["people"] = []
+            for i in event.people:
+                busy_dates = []
+                for busy_date in i.busy_dates:
+                    busy_dates.append(busy_date.date)
+                name = i.name
+                person = {
+                    "name":name,
+                    "busy_dates":busy_dates
+                }
+                res["people"].append(person)
+            
+            res["status"] = 1
+            return jsonify(res)
+        else:
+            return jsonify({"status":0})
     else:
-        return jsonify({"status":0})
+        return "invalid request"
 
 if __name__ == "__main__":
     db.create_all()
