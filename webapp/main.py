@@ -129,36 +129,42 @@ def delete_person():
     db.session.commit()
     return render_template("delete_person_status.html", status="Success", event = event, person_name=name)
     
+
+@app.route("/find_best_dates")
+def find_best_date():
+    if "id" not in request.args: return "Error <a href='/'>go back to home page</a>"
+    event_id = request.args["id"]
+    return render_template("find_best_dates.html", event_id=event_id)
+    
 @app.route("/json")
 def json_req():
-    if "id" in request.args:
-        id = request.args["id"]
-        event = Event.query.get(int(id))
-        if event != None:
-            res = event.as_dict()
-            
-            #get event dates
-            res["dates"] = []
-            for i in event.dates:
-                res["dates"].append(i.date)
-            
-            #get event people
-            res["people"] = []
-            for i in event.people:
-                busy_dates = []
-                for busy_date in i.busy_dates:
-                    busy_dates.append(busy_date.date)
-                name = i.name
-                person = {
-                    "name":name,
-                    "busy_dates":busy_dates
-                }
-                res["people"].append(person)
-            
-            res["status"] = 1
-            return jsonify(res)
-        else:
-            return jsonify({"status":0})
+    if "id" not in request.args: return "Error <a href='/'>go back to home page</a>"
+    id=request.args["id"]
+    event = Event.query.get(int(id))
+    if event != None:
+        res = event.as_dict()
+        
+        #get event dates
+        res["dates"] = []
+        for i in event.dates:
+            res["dates"].append(i.date)
+        
+        #get event people and their busy dates
+        res["people"] = []
+        for i in event.people:
+            busy_dates = []
+            for busy_date in i.busy_dates:
+                busy_dates.append(busy_date.date)
+            name = i.name
+            person = {
+                "name":name,
+                "busy_dates":busy_dates
+            }
+            res["people"].append(person)
+        
+        #return event dict
+        res["status"] = 1
+        return jsonify(res)
     else:
         return jsonify({"status":0})
 
