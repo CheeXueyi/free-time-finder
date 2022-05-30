@@ -13,27 +13,72 @@
 <meta id="event_id" event_id="{{event_id}}">
 <button>Sort by number of people free</button>
 <button>Sort by date</button>
-<table id="dates">
-    
+<table border="1">
+    <thead>
+        <td>Index</td><td>Dates</td><td>People who are busy</td>
+    </thead>
+    <tbody class="dates">
+    </tbody>
 </table>
+<div id="test">
+
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        let event_id = $("#event_id").attr("event_id")
-        console.log(event_id)
-        fetch("/json?id="+event_id)
-            .then(response => response.json())
-            .then(function(data) {
-                if (data.status == 1){
-                    console.log(data)
-                    //do work with data here
+    let event_id
+    function sort_dates_by_busy(unsorted_dates){
+        let sorted_dates = []
+        while(unsorted_dates.length != 0){
+            let smallest_index=0
+            for(let i = 1; i < unsorted_dates.length; i++){
+                if(unsorted_dates[i].busy.length < unsorted_dates[smallest_index].busy.length){
+                    smallest_index = i
                 }
-                else
-                {
-                    console.log("invalid id")
+            }
+            sorted_dates.push(unsorted_dates[smallest_index])
+            unsorted_dates.splice(smallest_index, 1)
+        }
+        return sorted_dates
+    }
+
+    function find_free_dates(event_obj){
+        raw_dates = []
+        for(let i = 0; i<event_obj.dates.length; i++){
+            let date = event_obj.dates[i]
+            let date_info = {
+                date: date,
+                busy: []
+            }
+            for(let j = 0; j < event_obj.people.length; j++){
+                let person = event_obj.people[j]
+                if(person.busy_dates.includes(date)){
+                    date_info.busy.push(person.name)
                 }
-            })
-            .catch(err => console.log(err))
+            }
+            raw_dates.push(date_info)
+        }
+        let arrange_dates = sort_dates_by_busy(raw_dates)
+        return arrange_dates
+    }
+
+    $(document).ready(async function(){
+        async function get_event(event_id){
+            const response = await fetch("/json?id="+event_id);
+
+            return response.json();
+        }
+        event_id = $("#event_id").attr("event_id")
+        let event = await get_event(event_id)
+        let arranged_dates = find_free_dates(event)
+        let to_add = ""
+        let busy_people
+        for(let i = 0; i < arranged_dates.length; i++){
+            console.log(arranged_dates[i])
+            busy_people = arranged_dates[i].busy.join()
+            to_add += "<tr><td>" + (i+1).toString(10) + "</td><td>" + arranged_dates[i].date.substr(5,11) + "</td><td>" + busy_people + "</td></tr>"
+        }
+        $(".dates").append(to_add)
     })  
+    
 </script>
 {% endblock %}
