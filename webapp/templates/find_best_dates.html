@@ -11,8 +11,8 @@
 
 {% block content %}
 <meta id="event_id" event_id="{{event_id}}">
-<button>Sort by number of people free</button>
-<button>Sort by date</button>
+<button id="sort_by_busy">Sort by number of people free</button>
+<button id="sort_by_date">Sort by date</button>
 <table border="1">
     <thead>
         <td>Index</td><td>Dates</td><td>People who are busy</td>
@@ -62,23 +62,40 @@
     }
 
     $(document).ready(async function(){
+        function display_dates(dates){
+            let to_add=""
+            let busy_people
+            for(let i = 0; i < dates.length; i++){
+                busy_people = dates[i].busy.join()
+                to_add += "<tr><td>" + (i+1).toString(10) + "</td><td>" + dates[i].date.substr(5,11) + "</td><td>" + busy_people + "</td></tr>"
+            }
+            $(".dates").append(to_add)
+        }
+
+        
+        function clear_dates(){
+            $(".dates").empty()
+        }
+
         async function get_event(event_id){
             const response = await fetch("/json?id="+event_id);
 
             return response.json();
         }
+
         event_id = $("#event_id").attr("event_id")
         let event = await get_event(event_id)
         let arranged_dates = find_free_dates(event)
-        let to_add = ""
-        let busy_people
-        for(let i = 0; i < arranged_dates.length; i++){
-            console.log(arranged_dates[i])
-            busy_people = arranged_dates[i].busy.join()
-            to_add += "<tr><td>" + (i+1).toString(10) + "</td><td>" + arranged_dates[i].date.substr(5,11) + "</td><td>" + busy_people + "</td></tr>"
-        }
-        $(".dates").append(to_add)
-    })  
+        display_dates(arranged_dates)
+        $("#sort_by_busy").click(function(){
+            clear_dates()
+            arranged_dates = sort_dates_by_busy(arranged_dates)
+            console.log(arranged_dates)
+            display_dates(arranged_dates)
+        })
+    })
+    
+    
     
 </script>
 {% endblock %}
