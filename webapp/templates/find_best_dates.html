@@ -41,6 +41,26 @@
         return sorted_dates
     }
 
+
+    function sort_dates_by_date(unsorted_dates){
+        let sorted_dates = []
+        while(unsorted_dates.length != 0){
+            let smallest_index = 0
+            for(let i = 1; i < unsorted_dates.length; i++){
+                let smallest_d = new Date(unsorted_dates[smallest_index].date.substr(5,11))
+                let d_str = unsorted_dates[i].date.substr(5,11)
+                let d = new Date(d_str)
+                if(d.valueOf() < smallest_d.valueOf()){
+                    smallest_index = i
+                }
+            }
+            sorted_dates.push(unsorted_dates[smallest_index])
+            unsorted_dates.splice(smallest_index,1)
+        }
+        return sorted_dates
+    }
+
+
     function find_free_dates(event_obj){
         raw_dates = []
         for(let i = 0; i<event_obj.dates.length; i++){
@@ -77,22 +97,31 @@
             $(".dates").empty()
         }
 
+
         async function get_event(event_id){
             const response = await fetch("/json?id="+event_id);
 
             return response.json();
         }
 
+
         event_id = $("#event_id").attr("event_id")
         let event = await get_event(event_id)
         let arranged_dates = find_free_dates(event)
         display_dates(arranged_dates)
+        
         $("#sort_by_busy").click(function(){
             clear_dates()
             arranged_dates = sort_dates_by_busy(arranged_dates)
-            console.log(arranged_dates)
             display_dates(arranged_dates)
         })
+
+        $("#sort_by_date").click(function(){
+            clear_dates()
+            arranged_dates = sort_dates_by_date(arranged_dates)
+            display_dates(arranged_dates)
+        })
+
     })
     
     
