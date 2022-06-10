@@ -42,6 +42,23 @@ h1 {
     color:grey;
 } 
 
+.button_small{
+    background-color: #FFFFFF;
+    border: 1px solid rgb(209,213,219);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: black;
+    padding: 7px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+
+.button_small:hover{
+    color:grey;
+} 
+
 table, th, td{
     border: 0.5px solid;
     border-collapse: collapse;
@@ -88,7 +105,7 @@ td{
 
 #navright {
     float:right;
-    line-height: 100px;
+    line-height: 97px;
 }
 
 #navright li{
@@ -112,13 +129,17 @@ td{
     color:grey;
 }
 
+.disable-anchor{
+    pointer-events: none;
+    cursor: default;
+}
+
 #menu {
     display:none;
 }
 
 /* phone websites */
 @media screen and (max-width: 900px){
-
     
     #navright{
         position:relative;
