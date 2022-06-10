@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <title>{% block title %}{% endblock%}</title>
 </head>
 <body>
   <div class="nav">
-    <button type="button" id='menu' onclick=''><img src="{{ url_for('static', filename='menu.png') }}" width='50' height='50'></button>
     <div id="navleft">
         <a href="/" id="logo">Free Time Finder</a>
+    </div>
+    <div id="menu_container">
+        <button type="button" id='menu' onclick=''><img src="{{ url_for('static', filename='menu.png') }}" width='50' height='50'></button>      
     </div>
     <div id="navright">
         <ul>
@@ -21,4 +26,29 @@
     {% block content %}
     {% endblock %}
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        let menu_shown = false
+        let width = window.innerWidth
+        if(width >= 1000){
+            $("#menu").hide()
+        }
+        else{
+            $("#navright").hide()
+        }
+
+        $("#menu").click(function(){
+            if(menu_shown){
+                $("#navright").hide()
+                menu_shown = false
+            }else{
+                $("#navright").show()
+                menu_shown = true
+            }
+        })
+    })
+</script>
+{% block script %}
+{% endblock %}
 </html>

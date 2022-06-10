@@ -10,6 +10,7 @@ body {
 * {
     margin:0px;
     list-style: none;
+    font-family: 'Raleway', sans-serif;
 }
     
 a {
@@ -20,13 +21,40 @@ h1 {
     font-size: 100px;
 }
 
-.green {
+.green{
     color:green;
 }
 
+.button {    
+    background-color: #FFFFFF;
+    border: 1px solid rgb(209,213,219);
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+.button:hover{
+    color:grey;
+} 
+
+table, th, td{
+    border: 0.5px solid;
+    border-collapse: collapse;
+}
+
+td{
+    padding-left: 2px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
 
 /** navigation starts here **/
-
 .nav {
     background-color:rgba(0,0,0,0.6);
     margin-top:0px;
@@ -43,16 +71,36 @@ h1 {
     
 #navleft {
     float:left;
+    line-height: 95px;
+    padding-left: 30px;
+    padding-top:0px;
+    padding-bottom: 0px;
+    margin: 0px;
+}
+
+#menu_container{
+    float:right;
     line-height: 100px;
-    padding-left: 50px;
-    padding-top:15px;
+    padding-right: 30px;
+    padding-top:0px;
 }
 
-#navleft img{
-    width:220px;
-    height:auto;
+#menu{
+    vertical-align: middle;
+    background-color:rgba(0,0,0,0);
+    transition: background-color 0.2s;
+    border:0;
 }
 
+#menu:hover{
+    background-color:rgba(0,0,0,0.2);
+}
+
+#navleft #logo{
+    color:white;
+    font-size: 30px;
+}
+/*
 .button {
     color:black;
     font-size:1.5em;
@@ -60,20 +108,45 @@ h1 {
     text-transform: uppercase;
     text-decoration: none;
     transition: color 0.1s;
-    font-family: 'Poppins', sans-serif;
+
+}
+*/
+@media screen and (min-width: 1000px) {
+    #navright {
+        float:right;
+        line-height: 100px;
+    }
+    
+    #navright li{
+        display:inline;
+    }    
 }
 
-.button:hover{
-    color:grey;
-} 
+@media screen and (max-width: 1000px) {
+    #navright{
+        background-color: rgba(102, 102, 102, 1);
+        margin-top: 100px;
+        padding:0;
+    }
 
-#navright {
-    float:right;
-    line-height: 100px;
-}
+    #navright ul{
+        padding:0;
+        margin:0;
+    }
 
-#navright li{
-    display:inline;
+    #navright ul a{
+        padding:0;
+        margin:0;
+        text-align: center;
+    }
+
+    #navright ul li{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding-top:5px;
+    }
+
 }
 
 #navright a {
@@ -82,8 +155,7 @@ h1 {
     margin-right:30px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.1s;
-    font-family: 'Poppins', sans-serif;
+    transition: color 0.1s; 
 }
 
 #navright a:hover{
@@ -94,3 +166,9 @@ h1 {
     color:grey;
 }
 
+
+/* Nav end */
+.landing_title{
+    font-size: 75px;
+    align-items: center;
+}

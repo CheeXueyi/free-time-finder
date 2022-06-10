@@ -13,17 +13,16 @@
 <meta id="event_id" event_id="{{event_id}}">
 <button id="sort_by_busy">Sort by number of people free</button>
 <button id="sort_by_date">Sort by date</button>
-<table border="1">
+<table>
     <thead>
         <td>Index</td><td>Dates</td><td>People who are busy</td>
     </thead>
     <tbody class="dates">
     </tbody>
 </table>
-<div id="test">
+{% endblock %}
 
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% block script %}
 <script>
     let event_id
     function sort_dates_by_busy(unsorted_dates){
@@ -86,7 +85,7 @@
             let to_add=""
             let busy_people
             for(let i = 0; i < dates.length; i++){
-                busy_people = dates[i].busy.join()
+                busy_people = dates[i].busy.join(", ")
                 to_add += "<tr><td>" + (i+1).toString(10) + "</td><td>" + dates[i].date.substr(5,11) + "</td><td>" + busy_people + "</td></tr>"
             }
             $(".dates").append(to_add)
@@ -122,9 +121,6 @@
             display_dates(arranged_dates)
         })
 
-    })
-    
-    
-    
+    })    
 </script>
 {% endblock %}
