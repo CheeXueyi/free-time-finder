@@ -10,13 +10,13 @@
 {% endblock %}
 
 {% block content %}
-<button id = 'btn' >Add more date ranges</button>
+<button id = 'btn' class="button">Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
     <p>Event title: <input type="text" name="title" required></p>
     <div id="dates">
         <p>Date range: <input type="date" name="date_range_start1" required> to <input type="date" name="date_range_end1"><br></p>
     </div>
-    <p id='subm'><input type='submit' value='Submit'></p>
+    <input type='submit' value='Submit' class="button">
 </form>
 {% endblock %}
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
     //create new date range
     var date = 2;
     $("#btn").click(function(){
-        $("#dates").append("<p id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' required> to <input type='date' name='date_range_end" + date.toString() + "'><button class='delete_row' type='button' row_id='"+ date.toString() + "''>Delete range</button><br></p>");
+        $("#dates").append("<p id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' required> to <input type='date' name='date_range_end" + date.toString() + "'><button class='delete_row button' type='button' row_id='"+ date.toString() + "''>Delete range</button><br></p>");
  	    date++;
     });
 

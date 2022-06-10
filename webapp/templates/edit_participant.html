@@ -26,8 +26,8 @@
         </tr>
     {% endfor %}
     </table>
-    <p id='subm'><input type='submit' value='Update'></p> 
+    <input type='submit' value='Update' class="button"> 
 </form>
-<a href="/delete_person?person_id={{person.id}}">Delete person</a>
-<a href="/find_event?event_id={{person.event_id}}"><p>Cancel</p></a>
+<a href="/delete_person?person_id={{person.id}}" class="button">Delete person</a>
+<a href="/find_event?event_id={{person.event_id}}" class="button">Cancel</a>
 {% endblock %}
