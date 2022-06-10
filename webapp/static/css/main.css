@@ -54,7 +54,9 @@ td{
     padding-bottom: 2px;
 }
 
+
 /** navigation starts here **/
+
 .nav {
     background-color:rgba(0,0,0,0.6);
     margin-top:0px;
@@ -78,75 +80,19 @@ td{
     margin: 0px;
 }
 
-#menu_container{
-    float:right;
-    line-height: 100px;
-    padding-right: 30px;
-    padding-top:0px;
-}
-
-#menu{
-    vertical-align: middle;
-    background-color:rgba(0,0,0,0);
-    transition: background-color 0.2s;
-    border:0;
-}
-
-#menu:hover{
-    background-color:rgba(0,0,0,0.2);
-}
-
 #navleft #logo{
     color:white;
     font-size: 30px;
-}
-/*
-.button {
-    color:black;
-    font-size:1.5em;
-    margin-right:30px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: color 0.1s;
-
-}
-*/
-@media screen and (min-width: 1000px) {
-    #navright {
-        float:right;
-        line-height: 100px;
-    }
-    
-    #navright li{
-        display:inline;
-    }    
+    font-weight: bold;
 }
 
-@media screen and (max-width: 1000px) {
-    #navright{
-        background-color: rgba(102, 102, 102, 1);
-        margin-top: 100px;
-        padding:0;
-    }
+#navright {
+    float:right;
+    line-height: 100px;
+}
 
-    #navright ul{
-        padding:0;
-        margin:0;
-    }
-
-    #navright ul a{
-        padding:0;
-        margin:0;
-        text-align: center;
-    }
-
-    #navright ul li{
-        display:flex;
-        align-items: center;
-        justify-content: center;
-        padding-top:5px;
-    }
-
+#navright li{
+    display:inline;
 }
 
 #navright a {
@@ -155,18 +101,64 @@ td{
     margin-right:30px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.1s; 
+    transition: color 0.1s;
 }
 
 #navright a:hover{
     color: grey;
 }
 
-#navright .active{
+#navright #active{
     color:grey;
 }
 
+#menu {
+    display:none;
+}
 
+/* phone websites */
+@media screen and (max-width: 900px){
+
+    
+    #navright{
+        position:relative;
+        margin-top:0px;
+        width:100%;
+        line-height: 0px;
+        background-color:rgba(0,0,0,0.6);
+        margin-right:0px;
+        opacity: 0;
+        z-index: 2;
+        transition: line-height 0.3s, opacity 0.3s;
+    }
+    
+    #navright li{
+        display:list-item;
+        list-style: none;
+        text-align: center;
+        transition: display 1s;
+    }
+    
+    #navright ul{
+        list-style: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    #menu{
+        background-color: rgba(0,0,0,0);
+        float:right;
+        margin-right:20px;
+        cursor:pointer;
+        border:none;
+        outline:none;
+        font-size: 10px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+        padding:0px;
+        display: block;
+    }
+}
 /* Nav end */
 .landing_title{
     font-size: 75px;
