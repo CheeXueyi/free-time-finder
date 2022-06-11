@@ -138,6 +138,10 @@ td{
     display:none;
 }
 
+#menu_img{
+    height: 50px;
+    width:auto;
+}
 /* phone websites */
 @media screen and (max-width: 900px){
     
@@ -174,8 +178,9 @@ td{
         border:none;
         outline:none;
         font-size: 10px;
-        margin-top: 24px;
-        margin-bottom: 24px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        height: 50px;
         padding:0px;
         display: block;
     }
