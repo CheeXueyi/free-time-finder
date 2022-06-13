@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/make_event.css') }}">
+{% endblock %}
+
 {% block title %}index{% endblock %}
 
 {% block navright %}
@@ -14,7 +18,7 @@
 <form id = "event_inp" action = "#" method="post">
     <p>Event title: <input type="text" name="title" required></p>
     <div id="dates">
-        <p>Date range: <input type="date" name="date_range_start1" required> to <input type="date" name="date_range_end1"><br></p>
+        <p>Date range: <input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></p>
     </div>
     <input type='submit' value='Submit' class="button">
 </form>
@@ -26,7 +30,7 @@ $(document).ready(function(){
     //create new date range
     var date = 2;
     $("#btn").click(function(){
-        $("#dates").append("<p id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' required> to <input type='date' name='date_range_end" + date.toString() + "'><button class='delete_row button' type='button' row_id='"+ date.toString() + "''>Delete range</button><br></p>");
+        $("#dates").append("<p id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' class='date_input' required> to <input type='date' name='date_range_end" + date.toString() + "' class='date_input' required><button class='delete_row button_small' type='button' row_id='"+ date.toString() + "''>Delete</button><br></p>");
  	    date++;
     });
 

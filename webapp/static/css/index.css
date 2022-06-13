@@ -1,0 +1,11 @@
+.landing_title{
+    font-size: 50px;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+

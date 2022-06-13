@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
 {% block title %}Home{% endblock %}
 
 {% block navright %}
@@ -10,13 +14,11 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="landing_title">
+<div class="landing_title">
     Find the best date to plan your event now
-</h1>
-<h2>
-    Insert introduction here
-</h2>
-<a class="button" href="/functions">
-        Get Started
-</a>
+</div>
+<div class="center">
+    <a class="button get_started" href="/functions">Get Started</a>
+</div>
+
 {% endblock %}
