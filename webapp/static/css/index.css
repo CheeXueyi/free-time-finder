@@ -1,11 +1,13 @@
 .landing_title{
-    font-size: 50px;
+    font-size: 35px;
     text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 200px;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 150px;
+    overflow: scroll;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    margin-bottom:20px;
 }
 

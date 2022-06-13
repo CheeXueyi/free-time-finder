@@ -33,7 +33,7 @@ h1 {
 
 .button {    
     background-color: #FFFFFF;
-    border: 1px solid rgb(209,213,219);
+    border: 1.5px solid rgb(0,0,0);
     border-radius: .5rem;
     box-sizing: border-box;
     color: black;
@@ -41,7 +41,7 @@ h1 {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     margin-top: 10px;
   }
 
@@ -51,7 +51,7 @@ h1 {
 
 .button_small{
     background-color: #FFFFFF;
-    border: 1px solid rgb(209,213,219);
+    border: 1.5px solid rgb(0,0,0);
     border-radius: .5rem;
     box-sizing: border-box;
     color: black;
@@ -106,8 +106,7 @@ td{
 
 #navleft #logo{
     color:white;
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 40px;
 }
 
 #navright {
@@ -157,7 +156,7 @@ td{
         margin-top:0px;
         width:100%;
         line-height: 0px;
-        background-color:rgba(0,0,0,0.6);
+        background-color:rgba(102,102,102,1);
         margin-right:0px;
         opacity: 0;
         z-index: 2;
