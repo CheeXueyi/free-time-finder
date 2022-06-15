@@ -1,11 +1,6 @@
 @media screen and (max-width: 900px){
     .date_input{
-        width: 104px
-    }
-
-    .button_small{
-        width:50px;
-        padding-left:0;
-        padding-right:0;
+        width: 20%;
+        margin-top: 5px; 
     }
 }

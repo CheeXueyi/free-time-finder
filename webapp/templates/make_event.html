@@ -16,7 +16,7 @@
 {% block content %}
 <button id = 'btn' class="button">Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
-    <p>Event title: <input type="text" name="title" required></p>
+    <p>Event title: <input type="text" name="title" placeholder="Title" required></p>
     <div id="dates">
         <p>Date range: <input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></p>
     </div>
@@ -38,6 +38,18 @@ $(document).ready(function(){
     $(document).on('click', '.delete_row', function(){
         let row_id = $(this).attr('row_id');
         $(this).closest("p").remove();
+    })
+
+    $("#event_inp").submit(function(event){
+        let dates = $("#dates :input")
+        for(let i = 0; i < dates.length; i+=2){
+            let start = new Date(dates[i].value)
+            let end = new Date(dates[i+1].value)
+            if(start.valueOf() > end.valueOf()){
+                alert("Starting date must be before ending date!")
+                event.preventDefault()
+            }
+        }
     })
 });
 </script>

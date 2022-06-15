@@ -3,11 +3,24 @@
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;
-    height: 150px;
-    overflow: scroll;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom:20px;
+    margin-bottom:7px;
 }
 
+br {
+    display: none; 
+}
+
+@media screen and (max-width: 900px){
+    .landing_title{
+        height: 100px;
+
+    }
+
+    br {
+        display: inline; 
+    }
+}
