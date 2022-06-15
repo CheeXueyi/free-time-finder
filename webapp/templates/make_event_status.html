@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/make_event.css') }}">
+{% endblock %}
+
 {% block title %}Event Creation Status{% endblock %}
 
 {% block navright %}
@@ -10,9 +14,27 @@
 {% endblock %}
 
 {% block content %}
-<p class="green">{{status}} in creating event "{{title}}"</p> 
-<h4 style="color:red;">LINK CANNOT BE RECOVERED, PLEASE COPY AND PASTE IT SOMEWHERE SAFE</h4>
-<p class="green">Event Link: DOMAIN/find_event?event_id={{id}}</p>
-<p class="green">Event ID: {{id}}</p>
+<p>{{status}} in creating event "{{title}}"</p> 
+<h4 style="color:red; font-weight:bold;">LINK CANNOT BE RECOVERED, PLEASE COPY AND PASTE IT SOMEWHERE SAFE</h4>
+<br>
+<p>Event Link:<span id="link" class="green"> DOMAIN/find_event?event_id={{id}}</span></p><button id="copy_link">Copy Link</button>
+<br><br>
+<p>Event ID: <span class="green">{{id}}</span></p>
 <a href="/functions" class="button">Back to functions page</a>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function(){
+        $("#link").text($("#link").text().replace("DOMAIN",window.location.host))
+        $("#copy_link").click(function(){
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($("#link").text().trim()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            alert("link copied")
+        })
+    })
+</script>
 {% endblock %}
