@@ -6,7 +6,7 @@ import datetime
 
 app = Flask(__name__)
 app.secret_key = "major_software_project"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sessions.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///events.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
@@ -220,7 +220,11 @@ def find_session():
     #find and show session free times
     return render_template("timequery.html")
 
-if __name__ == "__main__":
+@app.before_first_request
+def create_tables():
     db.create_all()
+    
+if __name__ == "__main__":
+    #db.create_all()
     app.run(debug=True,host="0.0.0.0")
     
