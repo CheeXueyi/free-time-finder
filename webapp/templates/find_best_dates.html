@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/find_event.css') }}">
+{% endblock %}
+
 {% block title %}Find best dates{% endblock %}
 
 {% block navright %}
@@ -11,16 +15,16 @@
 
 {% block content %}
 <meta id="event_id" event_id="{{event_id}}">
-<button id="sort_by_busy" class="button">Sort by number of people free</button>
-<button id="sort_by_date" class="button" style="margin-bottom:10px;">Sort by date</button>
-<table>
-    <thead>
-        <td>Index</td><td>Dates</td><td>People who are busy</td>
+<button id="sort_by_busy" class="button" style="margin-top:10px;margin-right: 10px;">Sort by number of people free</button>
+<button id="sort_by_date" class="button" style="margin-top:10px;">Sort by date</button>
+<table id="results_table">
+    <thead style="font-weight: bold;">
+        <td></td><td>Dates</td><td>People who are busy</td>
     </thead>
     <tbody class="dates">
     </tbody>
 </table>
-<a href="/find_event?event_id={{event_id}}" class="button">Back to event page</a>
+<a href="/find_event?event_id={{event_id}}" class="button" style="margin-top:10px;">Back to event page</a>
 {% endblock %}
 
 {% block script %}
@@ -87,7 +91,7 @@
             let busy_people
             for(let i = 0; i < dates.length; i++){
                 busy_people = dates[i].busy.join(", ")
-                to_add += "<tr><td>" + (i+1).toString(10) + "</td><td>" + dates[i].date.substr(5,11) + "</td><td>" + busy_people + "</td></tr>"
+                to_add += "<tr><td class='index_results'>" + (i+1).toString(10) + "</td><td class='date_cell'>" + dates[i].date.substr(5,11) + "</td><td class='busy_people'>" + busy_people + "</td></tr>"
             }
             $(".dates").append(to_add)
         }

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/find_event.css') }}">
+{% endblock %}
+
 {% block title %}index{% endblock %}
 
 {% block navright %}
@@ -10,8 +14,8 @@
 {% endblock %}
 
 {% block content %}
-<p>Event id:<input id="event_id" type="number" name="id" style="margin-top: 10px"required></p>
-<button id="find_event" class="button">Find Event</button>
+<h2>Event id: <input id="event_id" type="number" name="id" required></h2>
+<button id="find_event" class="button" style="margin-top: 10px">Find Event</button>
 {% endblock %}
 
 {% block script %}

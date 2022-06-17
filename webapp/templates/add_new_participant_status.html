@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/find_event.css') }}">
+{% endblock %}
+
 {% block title %}Add New Participant Status{% endblock %}
 
 {% block navright %}
@@ -10,8 +14,8 @@
 {% endblock %}
 
 {% block content %}
-<p class="green">{{status}}</p>
-<p class="green">Name:{{person.name}}</p>
-<p class="green">Busy dates:{% for i in person.busy_dates %}<br>{{i.date}}{% endfor %}</p>
+<p id="event_title">Success!</p>
+<h2><strong>{{person.name}}</strong> has been added to <strong>{{person.event.title}}</strong></h2>
+<h2 class="green">Busy dates:{% for i in person.busy_dates %}<br>{{i.date}}{% endfor %}</h2>
 <a href="/find_event?event_id={{person.event_id}}" class="button">Back to event page</a>
 {% endblock %}

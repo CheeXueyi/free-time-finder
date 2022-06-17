@@ -14,14 +14,18 @@
 {% endblock %}
 
 {% block content %}
-<p>{{status}} in creating event "{{title}}"</p> 
-<h4 style="color:red; font-weight:bold;">LINK CANNOT BE RECOVERED, PLEASE COPY AND PASTE IT SOMEWHERE SAFE</h4>
+<p class="center" id="status">Success!</p>
+<br> 
+<p class="center" style="font-size: 18px;">Event ID: <span style="color:blue;">    {{id}}</span></p>
 <br>
-<p>Event Link:<span id="link" class="green"> DOMAIN/find_event?event_id={{id}}</span></p><button id="copy_link" class="button_small">Copy Link</button>
-<br><br>
-<p>Event ID: <span class="green">{{id}}</span></p>
-<div id="buttons">
-    <a href="/functions" class="button">Back to functions page</a>
+<p class="center" style="font-size: 20px;">Share this link to participants:</p>
+<span id="link" class="center">DOMAIN/find_event?event_id={{id}}</span>
+<div class="center">
+    <button id="copy_link" class="button">Copy Link</button>
+</div>
+<br>
+<div class="center" id="buttons">
+    <a href="/functions" class="button" style="margin-right: 10px;">Back to functions page</a>
 </div>
     {% endblock %}
 
@@ -29,7 +33,7 @@
 <script>
     $(document).ready(function(){
         let raw_link = $("#link").text()
-        let event_directory= raw_link.substring(7, raw_link.length)
+        let event_directory= raw_link.substring(6, raw_link.length)
         $("#link").text($("#link").text().replace("DOMAIN",window.location.protocol + window.location.host))
         $("#buttons").append("<a href='" + event_directory + "' class='button'>Go to event page</a>")
         $("#copy_link").click(function(){

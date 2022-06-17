@@ -14,13 +14,13 @@
 {% endblock %}
 
 {% block content %}
-<button id = 'btn' class="button">Add more date ranges</button>
+<button style="margin-top: 10px;" id='btn' class="button">Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
-    <p>Event title: <input type="text" name="title" placeholder="Title" required></p>
+    <h2 style="margin-top: 10px;">Event title: <input type="text" name="title" placeholder="Title" required></h2>
     <div id="dates">
-        <p>Date range: <input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></p>
+        <h2 style="margin-top: 5px;">Date range: <input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></h2>
     </div>
-    <input type='submit' value='Submit' class="button">
+    <input style='margin-top: 10px;'type='submit' value='Submit' class="button">
 </form>
 {% endblock %}
 
@@ -30,14 +30,14 @@ $(document).ready(function(){
     //create new date range
     var date = 2;
     $("#btn").click(function(){
-        $("#dates").append("<p id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' class='date_input' required> to <input type='date' name='date_range_end" + date.toString() + "' class='date_input' required><button class='delete_row button_small' type='button' row_id='"+ date.toString() + "''>Delete</button><br></p>");
+        $("#dates").append("<h2 style='margin-top: 5px;' id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' class='date_input' required> to <input type='date' name='date_range_end" + date.toString() + "' class='date_input' required><button style='margin-left:2px;' class='delete_row button_small' type='button' row_id='"+ date.toString() + "''>Delete</button><br></h2>");
  	    date++;
     });
 
     //delete date range
     $(document).on('click', '.delete_row', function(){
         let row_id = $(this).attr('row_id');
-        $(this).closest("p").remove();
+        $(this).closest("h2").remove();
     })
 
     $("#event_inp").submit(function(event){

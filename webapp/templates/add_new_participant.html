@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/find_event.css') }}">
+{% endblock %}
+
 {% block title %}Add New Participant{% endblock %}
 
 {% block navright %}
@@ -10,11 +14,10 @@
 {% endblock %}
 
 {% block content %}
-<p style="margin-top: 10px;">Event title: {{event.title}}</p>
-<p style="margin-top: 10px;">Event id: {{event.id}}</p>
+<h2 id="event_title">{{event.title}}</h2>
 <form id = "event_inp" action = "#" method="post">
-    <p style="margin-top: 10px;">New participant name:<input type="text" name="name", placeholder="Name" required></p>
-    <table style="margin-top: 10px;" border="1">
+    <h2 style="margin-top: 8px;">New participant name: <input type="text" name="name", placeholder="Name" style="font-size:20px" required></h2>
+    <table id="participant_table" border="1">
         <tr>
             <th>date</th>
             <th>busy</th>
@@ -27,7 +30,7 @@
         </tr>
     {% endfor %}
     </table>
-    <input type='submit' value='Submit' class="button">
-    <a href="/find_event?event_id={{event.id}}" class="button">Cancel</a>
+    <input type='submit' value='Submit' class="button" style="margin-top: 10px;">
+    <a href="/find_event?event_id={{event.id}}" class="button" style="margin-top: 10px;">Cancel</a>
 </form>
 {% endblock %}
