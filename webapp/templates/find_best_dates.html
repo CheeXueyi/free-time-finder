@@ -12,7 +12,7 @@
 {% block content %}
 <meta id="event_id" event_id="{{event_id}}">
 <button id="sort_by_busy" class="button">Sort by number of people free</button>
-<button id="sort_by_date" class="button">Sort by date</button>
+<button id="sort_by_date" class="button" style="margin-bottom:10px;">Sort by date</button>
 <table>
     <thead>
         <td>Index</td><td>Dates</td><td>People who are busy</td>
@@ -20,6 +20,7 @@
     <tbody class="dates">
     </tbody>
 </table>
+<a href="/find_event?event_id={{event_id}}" class="button">Back to event page</a>
 {% endblock %}
 
 {% block script %}
