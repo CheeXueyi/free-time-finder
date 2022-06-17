@@ -59,11 +59,12 @@ h1 {
     border-radius: .5rem;
     box-sizing: border-box;
     color: black;
-    padding: 7px 16px;
+    padding: 6px 12px;
     text-align: center;
     text-decoration: none;
+    margin-top: 10px;
     display: inline-block;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .button_small:hover{

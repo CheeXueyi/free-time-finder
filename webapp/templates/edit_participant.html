@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<p>Event title:{{person.event.title}}</p>
-<p>Event id:{{person.event_id}}</p>
+<p style="margin-top: 10px;">Event title: {{person.event.title}}</p>
+<p style="margin-top: 10px;">Event id: {{person.event_id}}</p>
 <form id = "event_inp" action = "#" method="post">
-    <p>Participant name:<input type="text" name="name", value="{{person.name}}" required></p>
-    <table border="1">
+    <p style="margin-top: 10px;">Participant name:<input type="text" name="name", value="{{person.name}}" required></p>
+    <table style="margin-top: 10px;" border="1">
         <tr>
             <th>date</th>
             <th>busy</th>
