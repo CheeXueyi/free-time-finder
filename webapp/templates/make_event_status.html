@@ -20,13 +20,18 @@
 <p>Event Link:<span id="link" class="green"> DOMAIN/find_event?event_id={{id}}</span></p><button id="copy_link" class="button_small">Copy Link</button>
 <br><br>
 <p>Event ID: <span class="green">{{id}}</span></p>
-<a href="/functions" class="button">Back to functions page</a>
-{% endblock %}
+<div id="buttons">
+    <a href="/functions" class="button">Back to functions page</a>
+</div>
+    {% endblock %}
 
 {% block script %}
 <script>
     $(document).ready(function(){
-        $("#link").text($("#link").text().replace("DOMAIN",window.location.host))
+        let raw_link = $("#link").text()
+        let event_directory= raw_link.substring(7, raw_link.length)
+        $("#link").text($("#link").text().replace("DOMAIN",window.location.protocol + window.location.host))
+        $("#buttons").append("<a href='" + event_directory + "' class='button'>Go to event page</a>")
         $("#copy_link").click(function(){
             var $temp = $("<input>");
             $("body").append($temp);
