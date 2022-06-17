@@ -177,6 +177,10 @@ td{
     color: var(--accent);
 }
 
+#navright .active{
+    color: var(--accent);
+}
+
 .disable-anchor{
     pointer-events: none;
     cursor: default;
