@@ -16,15 +16,28 @@
 
 {% block script %}
 <script>
-    $(document).ready();
-    $("#find_event").click(function(){
-        let event_id = $("#event_id").val();
-        if(event_id == ""){
-            alert("Please enter event id")
+    $(document).ready(async function(){
+        async function get_event(event_id){
+            const response = await fetch("/json?id="+event_id);
+
+            return response.json();
         }
-        else{
-            window.location.href = `/find_event?event_id=${event_id}`   
-        }
+
+        $("#find_event").click(async function(){
+            let event_id = $("#event_id").val();
+            let event = await get_event(event_id)
+            if(event_id == ""){
+                alert("Please enter event id")
+            }
+            else if(event.status == 0){
+                alert("Event does not exist")
+            }
+            else{
+                window.location.href = `/find_event?event_id=${event_id}`   
+            }
     })
+        
+    });
+    
 </script>
 {% endblock %}
