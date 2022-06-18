@@ -14,17 +14,16 @@
 {% endblock %}
 
 {% block content %}
-<p class="center" id="status">Success!</p>
+<p id="status">Success!</p>
 <br> 
-<p class="center" style="font-size: 18px;">Event ID: <span style="color:blue;">    {{id}}</span></p>
+<p style="font-size: 20px;">Event ID: <span style="color:blue">    {{id}}</span></p>
 <br>
-<p class="center" style="font-size: 20px;">Share this link to participants:</p>
-<span id="link" class="center">DOMAIN/find_event?event_id={{id}}</span>
-<div class="center">
+<p style="font-size: 20px;">Share this link to participants:</p>
+<span id="link">DOMAIN/find_event?event_id={{id}}</span>
+<div>
     <button id="copy_link" class="button">Copy Link</button>
 </div>
-<br>
-<div class="center" id="buttons">
+<div id="buttons" style="margin-top: 30px;display: flex;">
     <a href="/functions" class="button" style="margin-right: 10px;">Back to functions page</a>
 </div>
     {% endblock %}

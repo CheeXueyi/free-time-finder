@@ -23,8 +23,12 @@
 
 #link{
     color: blue;
+    font-size: 20px;
+}
+
+#copy_link{
     font-size: 15px;
-    white-space: nowrap;
+    padding:10px 20px;
 }
 
 .date_input{
@@ -32,5 +36,5 @@
     max-width: 169px;
     -webkit-appearance: auto;
     background-color: var(--background);
-    border: solid 1px #1d3557;
+    border: solid 1px var(--main);
 }
