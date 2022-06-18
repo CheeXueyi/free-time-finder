@@ -16,7 +16,8 @@
 {% block content %}
 <h2 id="event_title">{{event.title}}</h2>
 <form id = "event_inp" action = "#" method="post">
-    <h2 style="margin-top: 8px;">New participant name: <input type="text" name="name", placeholder="Name" style="font-size:20px" required></h2>
+    <h2 style="margin-top: 8px;">New participant name:</h2>
+    <input type="text" name="name", placeholder="Name" style="font-size:20px" required>
     <table id="participant_table" border="1">
         <tr>
             <th>date</th>
@@ -26,7 +27,12 @@
     {% for date in event.dates %}
         <tr>
             <td>{{date.date}}</td>
-            <td><input type="checkbox" name="{{date.date}}"></td>
+            <td>
+                <label class="container">
+                    <input type="checkbox" name="{{date.date}}">
+                    <span class="checkmark"></span>
+                  </label>
+            </td>
         </tr>
     {% endfor %}
     </table>

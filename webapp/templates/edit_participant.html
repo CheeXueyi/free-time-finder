@@ -16,7 +16,8 @@
 {% block content %}
 <p id="event_title">{{person.event.title}}</p>
 <form id = "event_inp" action = "#" method="post">
-    <h2 style="margin-top: 8px;">Participant name:<input type="text" name="name", value="{{person.name}}" style="font-size:20px" required></h2>
+    <h2 style="margin-top: 8px;">Participant name:</h2>
+    <input type="text" name="name", value="{{person.name}}" style="font-size:20px" required>
     <table id="participant_table" border="1">
         <tr>
             <th>date</th>
@@ -25,7 +26,12 @@
     {% for date in person.event.dates %}
         <tr>
             <td>{{date.date}}</td>
-            <td><input type="checkbox" name="{{date.date}}" {% if date.date in person_busy_dates %} checked {% endif %}></td>
+            <td>
+                <label class="container">
+                    <input type="checkbox" name="{{date.date}}" {% if date.date in person_busy_dates %} checked {% endif %}>
+                    <span class="checkmark"></span>
+                </label>
+            </td>
         </tr>
     {% endfor %}
     </table>

@@ -17,8 +17,9 @@
 <button style="margin-top: 10px;" id='btn' class="button">Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
     <h2 style="margin-top: 10px;">Event title: <input type="text" name="title" placeholder="Title" required></h2>
+    <h2 style="margin-top: 5px;">Date ranges:</h2>
     <div id="dates">
-        <h2 style="margin-top: 5px;">Date range: <input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></h2>
+        <h2><input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></h2>
     </div>
     <input style='margin-top: 10px;'type='submit' value='Submit' class="button">
 </form>
@@ -26,11 +27,25 @@
 
 {% block script %}
 <script>
-$(document).ready(function(){    
+$(document).ready(function(){
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+    var tmr = new Date()
+    tmr.setDate(tmr.getDate() + 1);
+    var tmr_day = ("0" + tmr.getDate()).slice(-2);
+    var tmr_month = ("0" + (tmr.getMonth() + 1)).slice(-2);
+    var tomorrow = tmr.getFullYear()+"-"+(tmr_month)+"-"+(tmr_day) ;
+
+    $("input[name='date_range_start1']").val(today)
+    $("input[name='date_range_end1']").val(tomorrow)
+    alert(window.innerWidth)
     //create new date range
     var date = 2;
     $("#btn").click(function(){
-        $("#dates").append("<h2 style='margin-top: 5px;' id='date_range_" + date.toString() + "''>Date range: <input type='date' name='date_range_start" + date.toString() + "' class='date_input' required> to <input type='date' name='date_range_end" + date.toString() + "' class='date_input' required><button style='margin-left:2px;' class='delete_row button_small' type='button' row_id='"+ date.toString() + "''>Delete</button><br></h2>");
+        $("#dates").append("<h2 style='margin-top: 5px;' id='date_range_" + date.toString() + "''><input type='date' name='date_range_start" + date.toString() + "' class='date_input' value='"+ today +"'required> to <input type='date' name='date_range_end" + date.toString() + "' class='date_input' value='"+ tomorrow +"'required><button style='margin-left:2px;' class='delete_row button_small' type='button' row_id='"+ date.toString() + "''>Delete</button><br></h2>");
  	    date++;
     });
 

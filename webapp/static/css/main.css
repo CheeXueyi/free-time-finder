@@ -59,6 +59,7 @@ h2 {
     font-size: 20px;
     transition: color 0.1s;
     transition: background-color 0.1s;
+    -webkit-appearance: none;
 }
 
 .button:hover{
@@ -79,6 +80,7 @@ h2 {
     font-size: 20px;
     transition: color 0.1s;
     transition: background-color 0.1s;
+    -webkit-appearance: none;
   }
 
 .delete_button:hover{
@@ -99,6 +101,7 @@ h2 {
     font-size: 12px;
     transition: color 0.1s;
     transition: background-color 0.1s;
+    -webkit-appearance: none;
 }
 
 .button_small:hover{

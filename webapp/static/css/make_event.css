@@ -6,8 +6,14 @@
 
 @media screen and (max-width: 900px){
     .date_input{
-        width: 15%;
-        margin-top: 5px; 
+        width: 33%;
+        min-width: 135px; 
+    }
+}
+
+@media screen and (max-width: 390px){
+    .date_input{
+        min-width: 0px;
     }
 }
 
@@ -19,4 +25,12 @@
     color: blue;
     font-size: 15px;
     white-space: nowrap;
+}
+
+.date_input{
+    margin-top: 5px;
+    max-width: 169px;
+    -webkit-appearance: auto;
+    background-color: var(--background);
+    border: solid 1px #1d3557;
 }
