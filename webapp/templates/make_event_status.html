@@ -33,7 +33,7 @@
     $(document).ready(function(){
         let raw_link = $("#link").text()
         let event_directory= raw_link.substring(6, raw_link.length)
-        $("#link").text($("#link").text().replace("DOMAIN",window.location.protocol + window.location.host))
+        $("#link").text($("#link").text().replace("DOMAIN", window.location.origin))
         $("#buttons").append("<a href='" + event_directory + "' class='button'>Go to event page</a>")
         $("#copy_link").click(function(){
             var $temp = $("<input>");
