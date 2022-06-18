@@ -1,7 +1,7 @@
 .landing_title{
-    font-size: 35px;
+    font-size: 50px;
     text-align: center;
-    height: 100px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -20,8 +20,7 @@ br {
 
 @media screen and (max-width: 900px){
     .landing_title{
-        height: 100px;
-
+        font-size: 35px;
     }
 
     br {
