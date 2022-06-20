@@ -15,6 +15,10 @@
     .date_input{
         min-width: 0px;
     }
+
+    .delete_row{
+        padding: 4px 5px 3px;
+    }
 }
 
 #status{
