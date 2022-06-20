@@ -3,6 +3,7 @@ from flask import Flask, redirect, url_for, render_template, request, jsonify, s
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
 import datetime
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 app.secret_key = "major_software_project"
@@ -174,57 +175,25 @@ def tutorial():
     return render_template("tutorial.html")
 
 #about us starts here
-
 @app.route("/about")
 def about():
     return render_template("about.html")
 
+#error handling
+@app.errorhandler(Exception)
+def handle_exception(error):
+    # pass through HTTP errors
+    if isinstance(error, HTTPException):
+        return error
 
-#--------------------------------------------------------------
-#------------------------TESTING-------------------------------
-#--------------------------------------------------------------
-@app.route("/add_session", methods=["GET", "POST"])
-def add_session():
-    if request.method == "POST":
-        title = request.form["title"]
-        host = request.form["host"]
-        test = request.form["test"]
-        print(test)
-        '''
-        new_session = Sessions(title=title, host=host)
-        db.session.add(new_session)
-        db.session.commit()
-        id = new_session.id
-        return render_template("add_session_success.html", id=id)
-        '''
-    else:
-        return render_template("add_session.html")
+    # now you're handling non-HTTP exceptions only
+    return render_template("500_generic.html", error=error)
 
-@app.route("/add_session_status/<id>")
-def add_session_status(id):
-    query_sess = Event.query.get(id)
-    if query_sess != None:
-        query_sess = query_sess.as_dict()
-        title = query_sess["title"]
-        return render_template("add_session_status.html", id=id, status="success", title=title)
-    else:
-        return "id not found"
-
-@app.route("/add_person", methods=["GET", "POST"])
-def add_person():    
-    #code to add new person
-    return "coming soon" 
-
-@app.route("/find_session")
-def find_session():
-    #find and show session free times
-    return render_template("timequery.html")
-
+#loading database
 @app.before_first_request
 def create_tables():
     db.create_all()
     
 if __name__ == "__main__":
-    #db.create_all()
     app.run(debug=True,host="0.0.0.0")
     

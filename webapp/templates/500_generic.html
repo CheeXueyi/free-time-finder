@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block navright %}
+<li><a href="/">Home</a></li>
+<li><a href="/functions">Functions</a></li>
+<li><a href="/tutorial">Tutorial</a></li>
+<li><a href="/about">About Us</a></li>
+{% endblock %}
+
+{% block content %}
+<p style="font-weight:bold; font-size:45px; margin-top:10px">Oh no! Looks like you ran into an error.</p>
+<p style="font-size:30px; margin-top:10px">Error details:</p>
+<p style="font-size:20px">{{error}}</p>
+<div id="buttons" style="margin-top: 10px;display: flex;">
+    <a href="/" class="button" style="margin-right: 10px;">Back to Home</a>
+    <a href="/functions" class="button">Back to Functions</a>
+</div>
+{% endblock %}
