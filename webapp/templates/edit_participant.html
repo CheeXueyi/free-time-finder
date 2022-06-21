@@ -38,5 +38,18 @@
     <input type='submit' value='Update' class="button" style="margin-top: 10px;">
     <a href="/find_event?event_id={{person.event_id}}" class="button" style="margin-top: 10px;">Cancel</a>
 </form>
-<a href="/delete_person?person_id={{person.id}}" class="delete_button" style="margin-top: 10px">Delete person</a>
+<button id="delete_person_btn" class="delete_button" style="margin-top: 10px">Delete person</button>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(document).ready(function(){
+        $("#delete_person_btn").click(function(){
+            let deletion = confirm("This action cannot be undone, are you sure?")
+            if(deletion){
+                window.location.href = "/delete_person?person_id={{person.id}}"
+            }
+        })
+    })
+</script>
 {% endblock %}

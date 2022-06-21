@@ -1,23 +1,17 @@
-:root {
-    --background:#FFFFFF;
-    --main: #1d3557;
-    --accent: #e63946;
-}
-
 @media screen and (max-width: 900px){
     .date_input{
         width: 33%;
         min-width: 135px; 
+    }
+
+    .delete_row{
+        padding: 4px 5px 3px;
     }
 }
 
 @media screen and (max-width: 390px){
     .date_input{
         min-width: 0px;
-    }
-
-    .delete_row{
-        padding: 4px 5px 3px;
     }
 }
 
