@@ -78,6 +78,7 @@ h2 {
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
+    font-weight:bold;
     transition: color 0.1s;
     transition: background-color 0.1s;
     -webkit-appearance: none;
@@ -111,6 +112,10 @@ h2 {
 
 input[type="text"], input[type="date"]{
     font-size: 20px;
+}
+
+input[type="submit"]{
+    font-weight: bold;
 }
 
 table, th, td{

@@ -14,13 +14,14 @@
 {% endblock %}
 
 {% block content %}
-<button style="margin-top: 10px;" id='btn' class="button">Add more date ranges</button>
 <form id = "event_inp" action = "#" method="post">
     <h2 style="margin-top: 10px;">Event title: <input type="text" name="title" placeholder="Title" required></h2>
-    <h2 style="margin-top: 5px;">Date ranges:</h2>
+    <h2 style="margin-top: 5px;">Potential dates:</h2>
     <div id="dates">
         <h2><input type="date" name="date_range_start1" class="date_input" required> to <input type="date" name="date_range_end1" class="date_input" required><br></h2>
     </div>
+    <button style="margin-top: 10px;" id='btn' type ="button" class="button">Add more dates</button>
+    <br>
     <input style='margin-top: 10px;'type='submit' value='Submit' class="button">
 </form>
 {% endblock %}
