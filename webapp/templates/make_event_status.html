@@ -31,17 +31,17 @@
 {% block script %}
 <script>
     $(document).ready(function(){
-        let raw_link = $("#link").text()
-        let event_directory= raw_link.substring(6, raw_link.length)
-        $("#link").text($("#link").text().replace("DOMAIN", window.location.origin))
-        $("#buttons").append("<a href='" + event_directory + "' class='button'>Go to event page</a>")
+        let raw_link = $("#link").text();
+        let event_directory= raw_link.substring(6, raw_link.length);
+        $("#link").text($("#link").text().replace("DOMAIN", window.location.origin));
+        $("#buttons").append("<a href='" + event_directory + "' class='button'>Go to event page</a>");
         $("#copy_link").click(function(){
             var $temp = $("<input>");
             $("body").append($temp);
             $temp.val($("#link").text().trim()).select();
             document.execCommand("copy");
             $temp.remove();
-            $("#copy_link").text("Copied link")
+            $("#copy_link").text("Copied link");
         })
     })
 </script>

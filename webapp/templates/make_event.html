@@ -34,14 +34,14 @@ $(document).ready(function(){
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
-    var tmr = new Date()
+    var tmr = new Date();
     tmr.setDate(tmr.getDate() + 1);
     var tmr_day = ("0" + tmr.getDate()).slice(-2);
     var tmr_month = ("0" + (tmr.getMonth() + 1)).slice(-2);
-    var tomorrow = tmr.getFullYear()+"-"+(tmr_month)+"-"+(tmr_day) ;
+    var tomorrow = tmr.getFullYear()+"-"+(tmr_month)+"-"+(tmr_day);
 
-    $("input[name='date_range_start1']").val(today)
-    $("input[name='date_range_end1']").val(tomorrow)
+    $("input[name='date_range_start1']").val(today);
+    $("input[name='date_range_end1']").val(tomorrow);
 
     //create new date range
     var date = 2;
@@ -57,13 +57,13 @@ $(document).ready(function(){
     })
 
     $("#event_inp").submit(function(event){
-        let dates = $("#dates :input")
+        let dates = $("#dates :input");
         for(let i = 0; i < dates.length; i+=2){
-            let start = new Date(dates[i].value)
-            let end = new Date(dates[i+1].value)
+            let start = new Date(dates[i].value);
+            let end = new Date(dates[i+1].value);
             if(start.valueOf() > end.valueOf()){
-                alert("Starting date must be before ending date!")
-                event.preventDefault()
+                alert("Starting date must be before ending date!");
+                event.preventDefault();
             }
         }
     })

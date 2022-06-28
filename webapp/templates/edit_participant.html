@@ -45,11 +45,11 @@
 <script>
     $(document).ready(function(){
         $("#delete_person_btn").click(function(){
-            let deletion = confirm("This action cannot be undone, are you sure?")
+            let deletion = confirm("This action cannot be undone, are you sure?");
             if(deletion){
-                window.location.href = "/delete_person?person_id={{person.id}}"
+                window.location.href = "/delete_person?person_id={{person.id}}";
             }
-        })
-    })
+        });
+    });
 </script>
 {% endblock %}

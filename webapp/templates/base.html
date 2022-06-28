@@ -36,7 +36,7 @@
     
     if(window_width <= 900){
         for(let i = 0; i < anchors.length; i++){
-            anchors[i].classList.add("disable-anchor")
+            anchors[i].classList.add("disable-anchor");
         }        
     } 
 
@@ -46,14 +46,14 @@
             navright.style.lineHeight = '0';
             navright.getElementsByTagName('UL')[0].style.opacity = '0';
             for(let i = 0; i < anchors.length; i++){
-                anchors[i].classList.add("disable-anchor")
+                anchors[i].classList.add("disable-anchor");
             }
         }else{
             navright.style.opacity = '1';
             navright.style.lineHeight = '2';
             navright.getElementsByTagName('UL')[0].style.opacity = '1';
             for(let i = 0; i < anchors.length; i++){
-                anchors[i].classList.remove("disable-anchor")
+                anchors[i].classList.remove("disable-anchor");
             }
         }
     }

@@ -31,16 +31,15 @@
             let event_id = $("#event_id").val();
             let event = await get_event(event_id)
             if(event_id == ""){
-                alert("Please enter event id")
+                alert("Please enter event id");
             }
             else if(event.status == 0){
-                alert("Event does not exist")
+                alert("Event does not exist");
             }
             else{
-                window.location.href = `/find_event?event_id=${event_id}`   
+                window.location.href = `/find_event?event_id=${event_id}`;
             }
-    })
-        
+        });
     });
     
 </script>
